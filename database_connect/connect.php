@@ -25,8 +25,8 @@ if ($sql->rowCount() > 0) {
                 <td><?= $user['name']; ?></td>
                 <td><?= $user['email']; ?></td>
                 <td align="center">
-                    <a href="edit.php?id=<?= $user['id']; ?>">[ Editar ]</a>
-                    <a href="delete.php?id=<?= $user['id']; ?>">[ Excluir ]</a>
+                    <a href="editUser.php?id=<?= $user['id']; ?>">[ Editar ]</a>
+                    <a href="deleteUser.php?id=<?= $user['id']; ?>" onclick="return confirm('Tem certeza que deseja excluir?')">[ Excluir ]</a>
                 </td>
             </tr>
         <?php endforeach; ?>
