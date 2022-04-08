@@ -37,6 +37,7 @@ interface UserDAO
     public function add(User $user);
     public function findAll();
     public function findById($id);
+    public function findByEmail($email);
     public function update(User $user);
     public function delete($id);
 }
