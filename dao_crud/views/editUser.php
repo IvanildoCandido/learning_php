@@ -5,6 +5,7 @@ $userDao = new UserDaoMysql($pdo);
 
 $user = false;
 $id = filter_input(INPUT_GET, 'id');
+
 if ($id) {
     $user = $userDao->findById($id);
 }

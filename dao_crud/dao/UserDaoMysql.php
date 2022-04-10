@@ -37,7 +37,22 @@ class UserDaoMysql implements UserDAO
         return $list;
     }
     public function findById($id)
-    { }
+    {
+        $sql = $this->pdo->prepare("SELECT * FROM users WHERE id = :id");
+        $sql->bindValue(":id", $id);
+        $sql->execute();
+        if ($sql->rowCount() > 0) {
+            $data = $sql->fetch();
+            $user = new User();
+            $user->setId($data['id']);
+            $user->setName($data['name']);
+            $user->setEmail($data['email']);
+
+            return $user;
+        } else {
+            return false;
+        }
+    }
     public function findByEmail($email)
     {
         $sql = $this->pdo->prepare("SELECT * FROM users WHERE email = :email");
@@ -56,7 +71,19 @@ class UserDaoMysql implements UserDAO
         }
     }
     public function update(User $user)
-    { }
+    {
+        $sql = $this->pdo->prepare("UPDATE users SET name = :name, email = :email WHERE id = :id");
+        $sql->bindValue(':name', $user->getName());
+        $sql->bindValue(':email', $user->getEmail());
+        $sql->bindValue(':id', $user->getId());
+        $sql->execute();
+
+        return true;
+    }
     public function delete($id)
-    { }
+    {
+        $sql = $this->pdo->prepare("DELETE FROM users WHERE id = :id");
+        $sql->bindValue(":id", $id);
+        $sql->execute();
+    }
 }
